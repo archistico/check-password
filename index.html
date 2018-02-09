@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CALCOLA PW</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <link href="css/calcpw.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="ui inverted fixed menu">
+        <div class="header item">Calcolo password</div>
+    </div>
+    <div class="ui main container" id="app">
+        <h1>Password</h1>
+
+        <form class="ui form">
+            <div class="field">
+                <label>Password </label>
+                <input type="text" placeholder="Inserisci la password..." v-model="pw">
+            </div>
+        </form>
+        <div class="ui divider"></div>
+        <div class="ui two column stackable grid">
+            <div class="column">
+                <div class="ui negative message" v-if="!lunghezza">
+                    <div class="header">Lunghezza</div>
+                    <p>La password è minore di 12 caratteri</p>
+                </div>
+                <div class="ui success message" v-if="lunghezza">
+                    <div class="header">Lunghezza</div>
+                    <p>La password è maggiore di 12 caratteri</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui success message" v-if="!dbase">
+                    <div class="header">DB</div>
+                    <p>La password non è presente nel database</p>
+                </div>
+                <div class="ui negative message" v-if="dbase">
+                    <div class="header">DB</div>
+                    <p>La password è presente nel database</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui four column stackable grid">
+            <div class="column">
+                <div class="ui success message" v-if="maiuscole">
+                    <div class="header">A-Z</div>
+                    <p>Contiene lettere maiuscole</p>
+                </div>
+                <div class="ui negative message" v-if="!maiuscole">
+                    <div class="header">A-Z</div>
+                    <p>Non contiene lettere maiuscole</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui success message" v-if="minuscole">
+                    <div class="header">a-z</div>
+                    <p>Contiene lettere minuscole</p>
+                </div>
+                <div class="ui negative message" v-if="!minuscole">
+                    <div class="header">a-z</div>
+                    <p>Non contiene lettere minuscole</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui success message" v-if="numeri">
+                    <div class="header">0-9</div>
+                    <p>Contiene numeri</p>
+                </div>
+                <div class="ui negative message" v-if="!numeri">
+                    <div class="header">0-9</div>
+                    <p>Non contiene numeri</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui success message" v-if="speciali">
+                    <div class="header">!-?</div>
+                    <p>Contiene caratteri speciali</p>
+                </div>
+                <div class="ui negative message" v-if="!speciali">
+                    <div class="header">!-?</div>
+                    <p>Non contiene caratteri speciali</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="consiglio">Consiglio modifica password: <strong>{{ consiglio }}</strong></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
